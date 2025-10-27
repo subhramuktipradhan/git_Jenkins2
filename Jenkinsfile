@@ -1,31 +1,33 @@
-pipeline{
+pipeline {
     agent any
-    enviroment{
-        python='C:\\Users\\Subhra\\AppData\\Local\\Programs\\Python\\Python314\\python.exe'
+
+    environment {
+        python = 'C:\\Users\\Subhra\\AppData\\Local\\Programs\\Python\\Python314\\python.exe'
     }
-    stages{
-        stage("checkout code"){
-            checkout scm
 
+    stages {
+        stage('checkout code') {
+            steps {
+                checkout scm
+            }
         }
-        stage("extract data"){
-            bat "${env.python} extract.py"
 
-
+        stage('extract data') {
+            steps {
+                bat "${python} extract.py"
+            }
         }
     }
-    post{
-        sucess{
-            echo "sucess.."
 
+    post {
+        success {
+            echo 'success..'
         }
-        failure{
-            echo "failure"
-
+        failure {
+            echo 'failure'
         }
-        always{
-            echo "always"
-
+        always {
+            echo 'always'
         }
     }
 }
